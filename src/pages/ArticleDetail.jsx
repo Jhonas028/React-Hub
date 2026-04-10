@@ -10,19 +10,11 @@ export default function ArticleDetail() {
 
   if (!article) {
     return (
-      <div style={{ textAlign: "center", paddingTop: 80 }}>
-        <h2 style={{ marginBottom: 16 }}>Article not found</h2>
+      <div className="text-center pt-20">
+        <h2 className="mb-4 text-xl font-bold">Article not found</h2>
         <button
           onClick={() => navigate("/articles")}
-          style={{
-            background: "var(--accent)",
-            color: "#fff",
-            padding: "10px 20px",
-            borderRadius: 8,
-            fontWeight: 600,
-            cursor: "pointer",
-            border: "none",
-          }}
+          className="bg-accent text-white px-5 py-2.5 rounded-lg font-semibold border-none"
         >
           Back to Articles
         </button>
@@ -31,74 +23,29 @@ export default function ArticleDetail() {
   }
 
   return (
-    <div style={{ maxWidth: 720, margin: "0 auto" }}>
+    <div className="max-w-[720px] mx-auto px-4">
       {/* Back button */}
       <button
         onClick={() => navigate("/articles")}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 6,
-          color: "var(--text-secondary)",
-          fontSize: 13,
-          fontWeight: 500,
-          marginBottom: 28,
-          cursor: "pointer",
-          background: "none",
-          border: "none",
-        }}
+        className="flex items-center gap-1.5 text-ink-dim text-[13px] font-medium mb-7 bg-transparent border-none hover:text-ink transition-colors"
       >
         <ArrowLeft size={16} /> Back to Articles
       </button>
 
       {/* Header */}
-      <div
-        style={{
-          background: "var(--bg-card)",
-          border: "1px solid var(--border)",
-          borderRadius: 16,
-          padding: 32,
-          marginBottom: 24,
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 16,
-            marginBottom: 20,
-          }}
-        >
+      <div className="bg-card border border-line rounded-2xl p-6 sm:p-8 mb-6">
+        <div className="flex flex-wrap items-start gap-4 mb-5">
           <div
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: 14,
-              background: article.iconBg,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 26,
-            }}
+            className="w-14 h-14 rounded-[14px] flex items-center justify-center text-[26px] shrink-0"
+            style={{ background: article.iconBg }}
           >
             {article.icon}
           </div>
           <div>
-            <span
-              style={{
-                fontSize: 11,
-                fontWeight: 700,
-                padding: "3px 8px",
-                borderRadius: 6,
-                background: "rgba(91,110,245,0.15)",
-                color: "#818cf8",
-                marginBottom: 6,
-                display: "inline-block",
-              }}
-            >
+            <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-indigo-500/15 text-indigo-400 mb-1.5 inline-block">
               {article.level}
             </span>
-            <div style={{ display: "flex", gap: 6, marginTop: 4 }}>
+            <div className="flex gap-1.5 flex-wrap mt-1">
               {article.tags.map((t) => (
                 <TopicPill key={t} label={t} />
               ))}
@@ -106,72 +53,31 @@ export default function ArticleDetail() {
           </div>
         </div>
 
-        <h1
-          style={{
-            fontSize: 26,
-            fontWeight: 800,
-            marginBottom: 12,
-            lineHeight: 1.3,
-          }}
-        >
+        <h1 className="text-2xl sm:text-[26px] font-extrabold mb-3 leading-snug">
           {article.title}
         </h1>
-        <p
-          style={{
-            color: "var(--text-secondary)",
-            fontSize: 15,
-            lineHeight: 1.7,
-            marginBottom: 20,
-          }}
-        >
+        <p className="text-ink-dim text-[15px] leading-[1.7] mb-5">
           {article.description}
         </p>
 
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex items-center gap-2.5">
             <div
-              style={{
-                width: 36,
-                height: 36,
-                borderRadius: "50%",
-                background: article.authorColor,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: 13,
-                fontWeight: 700,
-                color: "#fff",
-              }}
+              className="w-9 h-9 rounded-full flex items-center justify-center text-[13px] font-bold text-white shrink-0"
+              style={{ background: article.authorColor }}
             >
               {article.authorInitial}
             </div>
             <div>
-              <div style={{ fontWeight: 600, fontSize: 14 }}>
-                {article.author}
-              </div>
-              <div style={{ fontSize: 12, color: "var(--text-muted)" }}>
-                {article.authorRole}
-              </div>
+              <div className="font-semibold text-sm">{article.author}</div>
+              <div className="text-xs text-ink-faint">{article.authorRole}</div>
             </div>
           </div>
-          <div
-            style={{
-              display: "flex",
-              gap: 16,
-              color: "var(--text-muted)",
-              fontSize: 13,
-            }}
-          >
-            <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <div className="flex gap-4 text-ink-faint text-[13px]">
+            <span className="flex items-center gap-1">
               <Clock size={13} /> {article.readTime} min read
             </span>
-            <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+            <span className="flex items-center gap-1">
               <BookOpen size={13} /> Full article
             </span>
           </div>
@@ -179,19 +85,9 @@ export default function ArticleDetail() {
       </div>
 
       {/* Content */}
-      <div
-        style={{
-          background: "var(--bg-card)",
-          border: "1px solid var(--border)",
-          borderRadius: 16,
-          padding: 32,
-          color: "var(--text-secondary)",
-          lineHeight: 1.8,
-          fontSize: 15,
-        }}
-      >
-        <p style={{ marginBottom: 20 }}>{article.content}</p>
-        <p style={{ marginBottom: 20 }}>
+      <div className="bg-card border border-line rounded-2xl p-6 sm:p-8 text-ink-dim leading-[1.8] text-[15px]">
+        <p className="mb-5">{article.content}</p>
+        <p className="mb-5">
           This is a deep dive article that covers all aspects of{" "}
           {article.title.toLowerCase()}. The content here would typically span
           several thousand words covering the topic in detail.

@@ -16,76 +16,30 @@ const navItems = [
 
 export default function Sidebar() {
   return (
-    <nav
-      style={{
-        width: "var(--sidebar-width)",
-        background: "var(--bg-secondary)",
-        borderRight: "1px solid var(--border)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: "12px 0",
-        gap: "4px",
-        flexShrink: 0,
-        zIndex: 50,
-      }}
-    >
+    <nav className="hidden md:flex w-16 bg-surface-alt border-r border-line flex-col items-center py-3 gap-1 shrink-0 z-50">
       {/* Logo */}
       <div
-        style={{
-          width: 36,
-          height: 36,
-          borderRadius: 10,
-          background: "linear-gradient(135deg, #5b6ef5, #8b5cf6)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginBottom: 16,
-          flexShrink: 0,
-        }}
+        className="w-9 h-9 rounded-[10px] flex items-center justify-center mb-4 shrink-0"
+        style={{ background: "linear-gradient(135deg, #5b6ef5, #8b5cf6)" }}
       >
         <Terminal size={18} color="#fff" />
       </div>
 
       {/* Nav links */}
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          gap: "4px",
-          alignItems: "center",
-        }}
-      >
+      <div className="flex-1 flex flex-col gap-1 items-center">
         {navItems.map(({ to, icon: Icon, label }) => (
           <NavLink
             key={to}
             to={to}
             end={to === "/"}
             title={label}
-            style={({ isActive }) => ({
-              width: 40,
-              height: 40,
-              borderRadius: 10,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: isActive ? "#fff" : "var(--text-muted)",
-              background: isActive ? "var(--accent)" : "transparent",
-              transition: "all 0.15s ease",
-            })}
-            onMouseEnter={(e) => {
-              if (!e.currentTarget.classList.contains("active")) {
-                e.currentTarget.style.background = "var(--bg-elevated)";
-                e.currentTarget.style.color = "var(--text-secondary)";
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!e.currentTarget.dataset.active) {
-                e.currentTarget.style.background = "";
-                e.currentTarget.style.color = "";
-              }
-            }}
+            className={({ isActive }) =>
+              `w-10 h-10 rounded-[10px] flex items-center justify-center transition-all duration-150 ${
+                isActive
+                  ? "bg-accent text-white"
+                  : "text-ink-faint hover:bg-elevated hover:text-ink-dim"
+              }`
+            }
           >
             <Icon size={18} />
           </NavLink>
@@ -96,16 +50,7 @@ export default function Sidebar() {
       <NavLink
         to="/settings"
         title="Settings"
-        style={{
-          width: 40,
-          height: 40,
-          borderRadius: 10,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "var(--text-muted)",
-          marginTop: "auto",
-        }}
+        className="w-10 h-10 rounded-[10px] flex items-center justify-center text-ink-faint hover:bg-elevated hover:text-ink-dim transition-all duration-150 mt-auto"
       >
         <Settings size={18} />
       </NavLink>

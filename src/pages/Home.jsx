@@ -26,108 +26,43 @@ export default function Home() {
   const recent = articles.slice(0, 3);
 
   return (
-    <div
-      style={{
-        maxWidth: 960,
-        margin: "0 auto",
-        display: "flex",
-        flexDirection: "column",
-        gap: 32,
-      }}
-    >
+    <div className="max-w-[960px] mx-auto flex flex-col gap-8">
       {/* Hero banner */}
       <div
+        className="border border-[#2e2070] rounded-2xl p-6 sm:p-9 relative overflow-hidden"
         style={{
           background:
             "linear-gradient(135deg, #1a1060 0%, #0f0c3a 40%, #1a0a40 70%, #2d1060 100%)",
-          border: "1px solid #2e2070",
-          borderRadius: 16,
-          padding: 36,
-          position: "relative",
-          overflow: "hidden",
         }}
       >
         <div
+          className="absolute inset-0 opacity-15 pointer-events-none"
           style={{
-            position: "absolute",
-            inset: 0,
-            opacity: 0.15,
             background:
               "radial-gradient(ellipse at 70% 50%, #7c3aed 0%, transparent 60%)",
           }}
         />
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 6,
-              fontSize: 12,
-              color: "#a78bfa",
-              fontWeight: 500,
-              background: "rgba(167,139,250,0.1)",
-              border: "1px solid rgba(167,139,250,0.2)",
-              borderRadius: 20,
-              padding: "3px 10px",
-              marginBottom: 14,
-            }}
-          >
+        <div className="relative z-10">
+          <div className="inline-flex items-center gap-1.5 text-xs text-violet-400 font-medium bg-violet-400/10 border border-violet-400/20 rounded-full px-2.5 py-0.5 mb-3.5">
             ⚡ New: React 19 Compiler
           </div>
-          <h1
-            style={{
-              fontSize: 32,
-              fontWeight: 800,
-              marginBottom: 10,
-              color: "#fff",
-              lineHeight: 1.2,
-            }}
-          >
+          <h1 className="text-2xl sm:text-[32px] font-extrabold mb-2.5 text-white leading-tight">
             Master Modern React
           </h1>
-          <p
-            style={{
-              color: "#c4b5fd",
-              fontSize: 15,
-              marginBottom: 24,
-              maxWidth: 460,
-              lineHeight: 1.6,
-            }}
-          >
+          <p className="text-violet-300 text-sm sm:text-[15px] mb-6 max-w-[460px] leading-relaxed">
             Deep dives into React internals, hooks, patterns, and the ecosystem.
             Written by core team members and industry experts.
           </p>
-          <div style={{ display: "flex", gap: 12 }}>
+          <div className="flex gap-3 flex-wrap">
             <button
               onClick={() => navigate("/articles")}
-              style={{
-                background: "var(--accent)",
-                color: "#fff",
-                padding: "10px 20px",
-                borderRadius: 8,
-                fontSize: 14,
-                fontWeight: 600,
-                display: "flex",
-                alignItems: "center",
-                gap: 6,
-                cursor: "pointer",
-                border: "none",
-              }}
+              className="bg-accent text-white px-5 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-1.5 border-none"
             >
               Explore Articles <ArrowRight size={14} />
             </button>
             <button
               onClick={() => navigate("/playground")}
-              style={{
-                background: "rgba(255,255,255,0.08)",
-                color: "#fff",
-                padding: "10px 20px",
-                borderRadius: 8,
-                fontSize: 14,
-                fontWeight: 600,
-                cursor: "pointer",
-                border: "1px solid rgba(255,255,255,0.12)",
-              }}
+              className="bg-white/8 text-white px-5 py-2.5 rounded-lg text-sm font-semibold border border-white/12"
             >
               Try Playground
             </button>
@@ -136,13 +71,7 @@ export default function Home() {
       </div>
 
       {/* Stats row */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: 16,
-        }}
-      >
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
           { icon: <FileText size={20} />, value: "50+", label: "Articles" },
           { icon: <Users size={20} />, value: "12", label: "Authors" },
@@ -150,42 +79,22 @@ export default function Home() {
         ].map(({ icon, value, label }) => (
           <div
             key={label}
-            style={{
-              background: "var(--bg-card)",
-              border: "1px solid var(--border)",
-              borderRadius: 12,
-              padding: "20px 24px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 8,
-            }}
+            className="bg-card border border-line rounded-xl p-5 flex flex-col items-center gap-2"
           >
-            <div style={{ color: "var(--accent)" }}>{icon}</div>
-            <div style={{ fontSize: 26, fontWeight: 800 }}>{value}</div>
-            <div style={{ fontSize: 13, color: "var(--text-secondary)" }}>
-              {label}
-            </div>
+            <div className="text-accent">{icon}</div>
+            <div className="text-[26px] font-extrabold">{value}</div>
+            <div className="text-[13px] text-ink-dim">{label}</div>
           </div>
         ))}
       </div>
 
       {/* Featured deep dives */}
       <div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            marginBottom: 16,
-          }}
-        >
+        <div className="flex items-center gap-2 mb-4">
           <Star size={16} color="#facc15" fill="#facc15" />
-          <h2 style={{ fontWeight: 700, fontSize: 16 }}>Featured Deep Dives</h2>
+          <h2 className="font-bold text-base">Featured Deep Dives</h2>
         </div>
-        <div
-          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {featured.map((article) => (
             <ArticleCard
               key={article.id}
@@ -197,23 +106,14 @@ export default function Home() {
       </div>
 
       {/* Bottom two-column: recently published + code spotlight */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recently published */}
         <div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 8,
-              marginBottom: 16,
-            }}
-          >
+          <div className="flex items-center gap-2 mb-4">
             <TrendingUp size={16} color="#22c55e" />
-            <h2 style={{ fontWeight: 700, fontSize: 16 }}>
-              Recently Published
-            </h2>
+            <h2 className="font-bold text-base">Recently Published</h2>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          <div className="flex flex-col gap-2.5">
             {recent.map((article) => (
               <ArticleCard
                 key={article.id}
@@ -226,9 +126,7 @@ export default function Home() {
 
         {/* Code spotlight */}
         <div>
-          <h2 style={{ fontWeight: 700, fontSize: 16, marginBottom: 16 }}>
-            Code Spotlight
-          </h2>
+          <h2 className="font-bold text-base mb-4">Code Spotlight</h2>
           <CodePreview code={spotlightCode} language="jsx" />
         </div>
       </div>

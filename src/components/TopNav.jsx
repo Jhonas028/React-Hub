@@ -14,123 +14,39 @@ export default function TopNav() {
   const title = pageTitles[baseRoute] || "ReactHub";
 
   return (
-    <header
-      style={{
-        height: 56,
-        borderBottom: "1px solid var(--border)",
-        background: "var(--bg-secondary)",
-        display: "flex",
-        alignItems: "center",
-        padding: "0 24px",
-        gap: 16,
-        flexShrink: 0,
-      }}
-    >
+    <header className="h-14 border-b border-line bg-surface-alt flex items-center px-4 sm:px-6 gap-3 shrink-0">
       {/* Page title */}
-      <div style={{ display: "flex", alignItems: "center", gap: 10, flex: 1 }}>
-        <span
-          style={{
-            fontWeight: 600,
-            fontSize: 16,
-            color: "var(--text-primary)",
-          }}
-        >
-          {title}
-        </span>
-        <span
-          style={{
-            fontSize: 11,
-            fontWeight: 500,
-            color: "var(--text-muted)",
-            background: "var(--bg-elevated)",
-            border: "1px solid var(--border-light)",
-            borderRadius: 6,
-            padding: "2px 8px",
-          }}
-        >
+      <div className="flex items-center gap-2.5 flex-1 min-w-0">
+        <span className="font-semibold text-base text-ink truncate">{title}</span>
+        <span className="hidden sm:inline text-[11px] font-medium text-ink-faint bg-elevated border border-line-soft rounded-md px-2 py-0.5 shrink-0">
           v18.3.0
         </span>
       </div>
 
-      {/* Search */}
-      <button
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-          background: "var(--bg-card)",
-          border: "1px solid var(--border)",
-          borderRadius: 8,
-          padding: "6px 12px",
-          color: "var(--text-muted)",
-          fontSize: 13,
-          cursor: "pointer",
-          minWidth: 160,
-        }}
-      >
+      {/* Search — hidden on small screens */}
+      <button className="hidden sm:flex items-center gap-2 bg-card border border-line rounded-lg px-3 py-1.5 text-ink-faint text-[13px] min-w-40 shrink-0">
         <Search size={14} />
         <span>Search...</span>
-        <kbd
-          style={{
-            marginLeft: "auto",
-            fontSize: 11,
-            color: "var(--text-muted)",
-            background: "var(--bg-elevated)",
-            border: "1px solid var(--border-light)",
-            borderRadius: 4,
-            padding: "1px 5px",
-            fontFamily: "inherit",
-          }}
-        >
+        <kbd className="ml-auto text-[11px] text-ink-faint bg-elevated border border-line-soft rounded px-1.5 py-px font-[inherit]">
           ⌘K
         </kbd>
       </button>
 
+      {/* Search icon only on mobile */}
+      <button className="sm:hidden w-9 h-9 rounded-lg flex items-center justify-center text-ink-faint bg-card border border-line">
+        <Search size={16} />
+      </button>
+
       {/* Bell */}
-      <button
-        style={{
-          width: 36,
-          height: 36,
-          borderRadius: 8,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "var(--text-muted)",
-          position: "relative",
-          background: "var(--bg-card)",
-          border: "1px solid var(--border)",
-        }}
-      >
+      <button className="w-9 h-9 rounded-lg flex items-center justify-center text-ink-faint relative bg-card border border-line shrink-0">
         <Bell size={16} />
-        <span
-          style={{
-            position: "absolute",
-            top: 6,
-            right: 6,
-            width: 7,
-            height: 7,
-            borderRadius: "50%",
-            background: "var(--accent)",
-            border: "1.5px solid var(--bg-secondary)",
-          }}
-        />
+        <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-accent border-[1.5px] border-surface-alt" />
       </button>
 
       {/* Avatar */}
       <div
-        style={{
-          width: 32,
-          height: 32,
-          borderRadius: "50%",
-          background: "linear-gradient(135deg, #5b6ef5, #a855f7)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: 12,
-          fontWeight: 700,
-          color: "#fff",
-          cursor: "pointer",
-        }}
+        className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white cursor-pointer shrink-0"
+        style={{ background: "linear-gradient(135deg, #5b6ef5, #a855f7)" }}
       >
         JD
       </div>

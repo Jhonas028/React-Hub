@@ -11,86 +11,29 @@ export default function CodePreview({ code, language = "jsx" }) {
   };
 
   return (
-    <div
-      style={{
-        background: "var(--bg-card)",
-        border: "1px solid var(--border)",
-        borderRadius: 12,
-        overflow: "hidden",
-        fontFamily: "JetBrains Mono, monospace",
-      }}
-    >
+    <div className="bg-card border border-line rounded-xl overflow-hidden font-mono">
       {/* Header bar */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "10px 16px",
-          borderBottom: "1px solid var(--border)",
-          background: "var(--bg-elevated)",
-        }}
-      >
-        <div style={{ display: "flex", gap: 6 }}>
-          <div
-            style={{
-              width: 12,
-              height: 12,
-              borderRadius: "50%",
-              background: "#ff5f57",
-            }}
-          />
-          <div
-            style={{
-              width: 12,
-              height: 12,
-              borderRadius: "50%",
-              background: "#febc2e",
-            }}
-          />
-          <div
-            style={{
-              width: 12,
-              height: 12,
-              borderRadius: "50%",
-              background: "#28c840",
-            }}
-          />
+      <div className="flex items-center justify-between px-4 py-2.5 border-b border-line bg-elevated">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+          <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
+          <div className="w-3 h-3 rounded-full bg-[#28c840]" />
         </div>
-        <span style={{ fontSize: 12, color: "var(--text-muted)" }}>
-          {language}
-        </span>
+        <span className="text-xs text-ink-faint">{language}</span>
         <button
           onClick={handleCopy}
-          style={{
-            color: "var(--text-muted)",
-            display: "flex",
-            alignItems: "center",
-            gap: 4,
-            fontSize: 12,
-            padding: "2px 6px",
-            borderRadius: 4,
-            background: "transparent",
-            border: "1px solid var(--border)",
-            cursor: "pointer",
-            transition: "color 0.15s",
-          }}
+          className="text-ink-faint flex items-center gap-1 text-xs px-1.5 py-0.5 rounded border border-line bg-transparent cursor-pointer transition-colors duration-150 hover:text-ink-dim"
         >
-          {copied ? <Check size={12} color="#22c55e" /> : <Copy size={12} />}
+          {copied ? (
+            <Check size={12} color="#22c55e" />
+          ) : (
+            <Copy size={12} />
+          )}
         </button>
       </div>
 
       {/* Code body */}
-      <pre
-        style={{
-          padding: "16px 20px",
-          overflowX: "auto",
-          fontSize: 13,
-          lineHeight: 1.7,
-          color: "#a8b1c4",
-          margin: 0,
-        }}
-      >
+      <pre className="px-5 py-4 overflow-x-auto text-[13px] leading-[1.7] text-[#a8b1c4] m-0">
         <code>{code}</code>
       </pre>
     </div>

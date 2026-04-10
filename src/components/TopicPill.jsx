@@ -1,17 +1,6 @@
 export default function TopicPill({ label }) {
   return (
-    <span
-      style={{
-        fontSize: 11,
-        fontWeight: 500,
-        padding: "2px 8px",
-        borderRadius: 6,
-        background: "var(--bg-elevated)",
-        border: "1px solid var(--border-light)",
-        color: "var(--text-secondary)",
-        display: "inline-block",
-      }}
-    >
+    <span className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-elevated border border-line-soft text-ink-dim inline-block">
       {label}
     </span>
   );

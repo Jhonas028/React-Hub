@@ -4,72 +4,46 @@ import { useNavigate } from "react-router-dom";
 import TopicPill from "../components/TopicPill";
 import articles from "../data/reactBlogs.json";
 
-const levelColors = {
-  Advanced: { bg: "rgba(91,110,245,0.15)", color: "#818cf8" },
-  Intermediate: { bg: "rgba(251,146,60,0.15)", color: "#fb923c" },
-  Beginner: { bg: "rgba(34,197,94,0.15)", color: "#4ade80" },
+const levelClasses = {
+  Advanced: {
+    badge: "bg-indigo-500/15 text-indigo-400",
+    border: "border-indigo-400/25",
+  },
+  Intermediate: {
+    badge: "bg-orange-400/15 text-orange-400",
+    border: "border-orange-400/25",
+  },
+  Beginner: {
+    badge: "bg-green-500/15 text-green-400",
+    border: "border-green-400/25",
+  },
 };
 
 function MasonryCard({ article }) {
   const navigate = useNavigate();
-  const level = levelColors[article.level] || levelColors.Intermediate;
+  const level = levelClasses[article.level] || levelClasses.Intermediate;
   const isBig = article.featured;
 
   return (
     <div
       onClick={() => navigate(`/articles/${article.id}`)}
-      style={{
-        background: "var(--bg-card)",
-        border: "1px solid var(--border)",
-        borderRadius: 14,
-        padding: isBig ? 24 : 16,
-        cursor: "pointer",
-        transition: "all 0.2s ease",
-        display: "flex",
-        flexDirection: isBig ? "column" : "row",
-        gap: isBig ? 16 : 14,
-        alignItems: isBig ? "flex-start" : "center",
-        gridRow: isBig ? "span 2" : "span 1",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = "var(--border-light)";
-        e.currentTarget.style.background = "var(--bg-card-hover)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "var(--border)";
-        e.currentTarget.style.background = "var(--bg-card)";
-      }}
+      className={`bg-card border border-line rounded-[14px] cursor-pointer transition-all duration-200 flex hover:border-line-soft hover:bg-card-hover ${
+        isBig
+          ? "p-6 flex-col gap-4 items-start row-span-2"
+          : "p-4 flex-row items-center gap-3.5"
+      }`}
     >
       {/* Icon */}
       <div
-        style={{
-          width: isBig ? 48 : 40,
-          height: isBig ? 48 : 40,
-          borderRadius: 12,
-          background: article.iconBg,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: isBig ? 22 : 18,
-          flexShrink: 0,
-          position: "relative",
-        }}
+        className={`rounded-xl flex items-center justify-center shrink-0 relative ${
+          isBig ? "w-12 h-12 text-[22px]" : "w-10 h-10 text-[18px]"
+        }`}
+        style={{ background: article.iconBg }}
       >
         {article.icon}
         {isBig && (
           <span
-            style={{
-              position: "absolute",
-              top: -4,
-              right: -4,
-              fontSize: 10,
-              fontWeight: 700,
-              padding: "2px 6px",
-              borderRadius: 4,
-              background: level.bg,
-              color: level.color,
-              border: `1px solid ${level.color}40`,
-            }}
+            className={`absolute -top-1 -right-1 text-[10px] font-bold px-1.5 py-0.5 rounded border ${level.badge} ${level.border}`}
           >
             {article.level}
           </span>
@@ -77,91 +51,42 @@ function MasonryCard({ article }) {
       </div>
 
       {/* Content */}
-      <div style={{ flex: 1, minWidth: 0 }}>
+      <div className="flex-1 min-w-0">
         {isBig ? (
           <>
-            <h3
-              style={{
-                fontWeight: 700,
-                fontSize: 18,
-                marginBottom: 10,
-                lineHeight: 1.35,
-              }}
-            >
+            <h3 className="font-bold text-lg mb-2.5 leading-snug">
               {article.title}
             </h3>
-            <p
-              style={{
-                color: "var(--text-secondary)",
-                fontSize: 13,
-                lineHeight: 1.6,
-                marginBottom: 16,
-              }}
-            >
+            <p className="text-ink-dim text-[13px] leading-relaxed mb-4">
               {article.description}
             </p>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
                 <div
-                  style={{
-                    width: 26,
-                    height: 26,
-                    borderRadius: "50%",
-                    background: article.authorColor,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: 10,
-                    fontWeight: 700,
-                    color: "#fff",
-                  }}
+                  className="w-[26px] h-[26px] rounded-full flex items-center justify-center text-[10px] font-bold text-white"
+                  style={{ background: article.authorColor }}
                 >
                   {article.authorInitial}
                 </div>
                 <div>
-                  <div style={{ fontSize: 12, fontWeight: 600 }}>
-                    {article.author}
-                  </div>
-                  <div style={{ fontSize: 11, color: "var(--text-muted)" }}>
+                  <div className="text-xs font-semibold">{article.author}</div>
+                  <div className="text-[11px] text-ink-faint">
                     {article.authorRole}
                   </div>
                 </div>
               </div>
-              <span style={{ fontSize: 12, color: "var(--text-muted)" }}>
+              <span className="text-xs text-ink-faint">
                 ⏱ {article.readTime} min
               </span>
             </div>
           </>
         ) : (
           <>
-            <div
-              style={{
-                fontWeight: 600,
-                fontSize: 14,
-                marginBottom: 4,
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-              }}
-            >
+            <div className="font-semibold text-sm mb-1 truncate">
               {article.title}
             </div>
-            <div
-              style={{
-                fontSize: 12,
-                color: "var(--text-secondary)",
-                marginBottom: 6,
-              }}
-            >
-              {article.author}
-            </div>
-            <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+            <div className="text-xs text-ink-dim mb-1.5">{article.author}</div>
+            <div className="flex gap-1.5 flex-wrap">
               {article.tags.map((t) => (
                 <TopicPill key={t} label={t} />
               ))}
@@ -188,136 +113,60 @@ export default function Articles() {
   }, [query]);
 
   return (
-    <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-      <h1 style={{ fontSize: 26, fontWeight: 800, marginBottom: 24 }}>
-        All Articles
-      </h1>
+    <div className="max-w-[1000px] mx-auto">
+      <h1 className="text-[26px] font-extrabold mb-6">All Articles</h1>
 
       {/* Search bar */}
-      <div style={{ display: "flex", gap: 12, marginBottom: 16 }}>
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-            background: "var(--bg-card)",
-            border: "1px solid var(--border)",
-            borderRadius: 10,
-            padding: "10px 16px",
-          }}
-        >
-          <Search size={16} color="var(--text-muted)" />
+      <div className="flex gap-3 mb-4">
+        <div className="flex-1 flex items-center gap-2.5 bg-card border border-line rounded-[10px] px-4 py-2.5">
+          <Search size={16} className="text-ink-faint shrink-0" />
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search articles, authors, or tags..."
-            style={{
-              flex: 1,
-              background: "none",
-              border: "none",
-              outline: "none",
-              color: "var(--text-primary)",
-              fontSize: 14,
-            }}
+            className="flex-1 bg-transparent border-none outline-none text-ink text-sm placeholder:text-ink-faint"
           />
           {query && (
             <button
               onClick={() => setQuery("")}
-              style={{
-                color: "var(--text-muted)",
-                cursor: "pointer",
-                background: "none",
-                border: "none",
-              }}
+              className="text-ink-faint"
             >
               <X size={14} />
             </button>
           )}
         </div>
-        <button
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            background: "var(--bg-card)",
-            border: "1px solid var(--border)",
-            borderRadius: 10,
-            padding: "10px 16px",
-            color: "var(--text-secondary)",
-            fontSize: 14,
-            fontWeight: 500,
-            cursor: "pointer",
-          }}
-        >
-          <SlidersHorizontal size={16} /> Filters
+        <button className="flex items-center gap-2 bg-card border border-line rounded-[10px] px-4 py-2.5 text-ink-dim text-sm font-medium shrink-0">
+          <SlidersHorizontal size={16} />
+          <span className="hidden sm:inline">Filters</span>
         </button>
       </div>
 
       {/* Count */}
-      <p
-        style={{
-          fontSize: 13,
-          color: "var(--text-secondary)",
-          marginBottom: 20,
-        }}
-      >
+      <p className="text-[13px] text-ink-dim mb-5">
         Showing{" "}
-        <strong style={{ color: "var(--text-primary)" }}>
-          {filtered.length}
-        </strong>{" "}
+        <strong className="text-ink">{filtered.length}</strong>{" "}
         of {articles.length} articles
       </p>
 
       {/* Grid or empty state */}
       {filtered.length === 0 ? (
-        <div style={{ textAlign: "center", paddingTop: 80 }}>
-          <div
-            style={{
-              width: 64,
-              height: 64,
-              borderRadius: "50%",
-              background: "var(--bg-card)",
-              border: "1px solid var(--border)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "0 auto 20px",
-            }}
-          >
-            <Search size={24} color="var(--text-muted)" />
+        <div className="text-center pt-20">
+          <div className="w-16 h-16 rounded-full bg-card border border-line flex items-center justify-center mx-auto mb-5">
+            <Search size={24} className="text-ink-faint" />
           </div>
-          <h3 style={{ fontWeight: 700, fontSize: 18, marginBottom: 8 }}>
-            No articles found
-          </h3>
-          <p style={{ color: "var(--text-secondary)", marginBottom: 24 }}>
+          <h3 className="font-bold text-lg mb-2">No articles found</h3>
+          <p className="text-ink-dim mb-6">
             Try adjusting your search or filters
           </p>
           <button
             onClick={() => setQuery("")}
-            style={{
-              background: "var(--accent)",
-              color: "#fff",
-              padding: "10px 24px",
-              borderRadius: 8,
-              fontWeight: 600,
-              fontSize: 14,
-              cursor: "pointer",
-              border: "none",
-            }}
+            className="bg-accent text-white px-6 py-2.5 rounded-lg font-semibold text-sm border-none"
           >
             Clear all filters
           </button>
         </div>
       ) : (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gridAutoRows: "160px",
-            gap: 16,
-          }}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[160px] gap-4">
           {filtered.map((article) => (
             <MasonryCard key={article.id} article={article} />
           ))}
