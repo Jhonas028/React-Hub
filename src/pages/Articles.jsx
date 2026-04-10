@@ -35,7 +35,7 @@ function MasonryCard({ article }) {
     >
       {/* Icon */}
       <div
-        className={`rounded-xl flex items-center justify-center shrink-0 relative ${
+        className={`rounded-xl flex items-center justify-center mb-8 shrink-0 relative ${
           isBig ? "w-12 h-12 text-[22px]" : "w-10 h-10 text-[18px]"
         }`}
         style={{ background: article.iconBg }}
@@ -43,7 +43,7 @@ function MasonryCard({ article }) {
         {article.icon}
         {isBig && (
           <span
-            className={`absolute -top-1 -right-1 text-[10px] font-bold px-1.5 py-0.5 rounded border ${level.badge} ${level.border}`}
+            className={`absolute -top-1 -right-70 text-[10px] font-bold px-1.5 py-0.5 rounded border ${level.badge} ${level.border}`}
           >
             {article.level}
           </span>
@@ -127,10 +127,7 @@ export default function Articles() {
             className="flex-1 bg-transparent border-none outline-none text-ink text-sm placeholder:text-ink-faint"
           />
           {query && (
-            <button
-              onClick={() => setQuery("")}
-              className="text-ink-faint"
-            >
+            <button onClick={() => setQuery("")} className="text-ink-faint">
               <X size={14} />
             </button>
           )}
@@ -143,9 +140,8 @@ export default function Articles() {
 
       {/* Count */}
       <p className="text-[13px] text-ink-dim mb-5">
-        Showing{" "}
-        <strong className="text-ink">{filtered.length}</strong>{" "}
-        of {articles.length} articles
+        Showing <strong className="text-ink">{filtered.length}</strong> of{" "}
+        {articles.length} articles
       </p>
 
       {/* Grid or empty state */}

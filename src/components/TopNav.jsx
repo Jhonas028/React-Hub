@@ -17,8 +17,20 @@ export default function TopNav() {
     <header className="h-14 border-b border-line bg-surface-alt flex items-center px-4 sm:px-6 gap-3 shrink-0">
       {/* Page title */}
       <div className="flex items-center gap-2.5 flex-1 min-w-0">
-        <span className="font-semibold text-base text-ink truncate">{title}</span>
-        <span className="hidden sm:inline text-[11px] font-medium text-ink-faint bg-elevated border border-line-soft rounded-md px-2 py-0.5 shrink-0">
+        <span
+          className="font-bold truncate"
+          style={{
+            background: "linear-gradient(90deg, #7c3aed, #06b6d4)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            display: "inline-block",
+            fontSize: "20px",
+          }}
+        >
+          {title}
+        </span>
+        <span className="hidden sm:inline text-[11px] font-medium text-ink-faint bg-elevated border border-line-soft rounded-full px-2 py-0.5 shrink-0">
           v18.3.0
         </span>
       </div>
