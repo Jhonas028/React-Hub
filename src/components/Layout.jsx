@@ -31,9 +31,7 @@ export default function Layout() {
             end={to === "/"}
             className={({ isActive }) =>
               `flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-lg text-[10px] font-medium transition-colors duration-150 ${
-                isActive
-                  ? "text-accent"
-                  : "text-ink-faint hover:text-ink-dim"
+                isActive ? "text-accent" : "text-ink-faint hover:text-ink-dim"
               }`
             }
           >

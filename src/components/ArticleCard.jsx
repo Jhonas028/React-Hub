@@ -25,14 +25,20 @@ export default function ArticleCard({ article, variant = "default" }) {
           >
             {article.icon}
           </div>
-          <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-md ${levelClass}`}>
+          <span
+            className={`text-[11px] font-semibold px-2 py-0.5 rounded-md ${levelClass}`}
+          >
             {article.level}
           </span>
         </div>
 
         <div>
-          <h3 className="font-bold text-base mb-2 leading-snug">{article.title}</h3>
-          <p className="text-ink-dim text-[13px] leading-relaxed">{article.description}</p>
+          <h3 className="font-bold text-base mb-2 leading-snug">
+            {article.title}
+          </h3>
+          <p className="text-ink-dim text-[13px] leading-relaxed">
+            {article.description}
+          </p>
         </div>
 
         <div className="flex items-center justify-between mt-auto">
@@ -45,7 +51,9 @@ export default function ArticleCard({ article, variant = "default" }) {
             </div>
             <div>
               <div className="text-xs font-medium">{article.author}</div>
-              <div className="text-[11px] text-ink-faint">{article.authorRole}</div>
+              <div className="text-[11px] text-ink-faint">
+                {article.authorRole}
+              </div>
             </div>
           </div>
           <div className="flex items-center gap-2 text-ink-faint text-xs">
@@ -71,7 +79,9 @@ export default function ArticleCard({ article, variant = "default" }) {
         {article.icon}
       </div>
       <div className="flex-1 min-w-0">
-        <div className="font-semibold text-sm mb-1 truncate">{article.title}</div>
+        <div className="font-semibold text-sm mb-1 truncate">
+          {article.title}
+        </div>
         <div className="text-xs text-ink-dim mb-1.5">{article.author}</div>
         <div className="flex gap-1.5 flex-wrap">
           {article.tags.map((tag) => (
