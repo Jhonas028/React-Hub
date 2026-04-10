@@ -141,103 +141,39 @@ export default function Playground() {
   };
 
   return (
-    <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+    <div className="max-w-[1100px] mx-auto px-4">
       {/* Header */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "space-between",
-          marginBottom: 24,
-        }}
-      >
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6 sm:mb-6">
         <div>
-          <h1 style={{ fontSize: 24, fontWeight: 800, marginBottom: 4 }}>
+          <h1 className="text-2xl sm:text-3xl font-extrabold mb-1 sm:mb-1">
             React Playground
           </h1>
-          <p style={{ color: "var(--text-secondary)", fontSize: 14 }}>
+          <p className="text-ink-dim text-sm sm:text-base">
             Experiment with React code in real-time
           </p>
         </div>
-        <button
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            background: "var(--bg-card)",
-            border: "1px solid var(--border)",
-            borderRadius: 8,
-            padding: "8px 16px",
-            color: "var(--text-secondary)",
-            fontSize: 13,
-            fontWeight: 500,
-            cursor: "pointer",
-          }}
-        >
+        <button className="flex items-center gap-2 bg-card border border-line rounded-lg px-4 py-2 text-ink-dim text-[13px] font-medium hover:border-line-soft transition-colors">
           <Download size={15} /> Export
         </button>
       </div>
 
       {/* Editor + Preview */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 20,
-          marginBottom: 20,
-        }}
-      >
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
         {/* Editor */}
-        <div
-          style={{
-            background: "var(--bg-card)",
-            border: "1px solid var(--border)",
-            borderRadius: 12,
-            overflow: "hidden",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
+        <div className="bg-card border border-line rounded-lg overflow-hidden flex flex-col">
           {/* Editor topbar */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              padding: "10px 16px",
-              borderBottom: "1px solid var(--border)",
-              background: "var(--bg-elevated)",
-            }}
-          >
-            <span
-              style={{
-                fontSize: 13,
-                color: "var(--text-secondary)",
-                fontFamily: "JetBrains Mono, monospace",
-              }}
-            >
-              App.jsx
-            </span>
-            <div style={{ display: "flex", gap: 8 }}>
+          <div className="flex items-center justify-between px-4 py-2.5 border-b border-line bg-elevated">
+            <span className="text-[13px] text-ink-dim font-mono">App.jsx</span>
+            <div className="flex gap-2">
               <button
                 onClick={handleReset}
-                style={{
-                  color: "var(--text-muted)",
-                  cursor: "pointer",
-                  background: "none",
-                  border: "none",
-                }}
+                className="text-ink-faint hover:text-ink-dim transition-colors"
               >
                 <RotateCcw size={14} />
               </button>
               <button
                 onClick={() => navigator.clipboard.writeText(code)}
-                style={{
-                  color: "var(--text-muted)",
-                  cursor: "pointer",
-                  background: "none",
-                  border: "none",
-                }}
+                className="text-ink-faint hover:text-ink-dim transition-colors"
               >
                 <Copy size={14} />
               </button>
@@ -249,41 +185,15 @@ export default function Playground() {
             value={code}
             onChange={(e) => setCode(e.target.value)}
             spellCheck={false}
-            style={{
-              flex: 1,
-              background: "transparent",
-              border: "none",
-              outline: "none",
-              color: "#a8b1c4",
-              fontFamily: "JetBrains Mono, monospace",
-              fontSize: 13,
-              lineHeight: 1.7,
-              padding: "16px 20px",
-              resize: "none",
-              minHeight: 280,
-            }}
+            className="flex-1 bg-transparent border-none outline-none text-[#a8b1c4] font-mono text-[13px] leading-[1.7] p-5 resize-none placeholder-ink-faint"
+            style={{ minHeight: 280 }}
           />
 
           {/* Run button */}
           <button
             onClick={handleRun}
             disabled={running}
-            style={{
-              margin: 16,
-              background: running ? "#16a34a" : "#22c55e",
-              color: "#fff",
-              border: "none",
-              borderRadius: 8,
-              padding: "12px",
-              fontSize: 14,
-              fontWeight: 700,
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 8,
-              transition: "background 0.15s",
-            }}
+            className={`m-4 ${running ? "bg-green-600" : "bg-green"} text-white border-none rounded-lg px-3 py-3 text-sm font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-all`}
           >
             <Play size={16} fill="#fff" />
             {running ? "Running..." : "Run Code"}
@@ -291,83 +201,22 @@ export default function Playground() {
         </div>
 
         {/* Preview */}
-        <div
-          style={{
-            background: "#fff",
-            border: "1px solid var(--border)",
-            borderRadius: 12,
-            overflow: "hidden",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              padding: "10px 16px",
-              borderBottom: "1px solid #e5e7eb",
-              background: "#f9fafb",
-            }}
-          >
-            <span style={{ fontSize: 13, color: "#6b7280", fontWeight: 500 }}>
+        <div className="bg-white border border-line rounded-lg overflow-hidden flex flex-col">
+          <div className="flex items-center justify-between px-4 py-2.5 border-b border-gray-200 bg-gray-50">
+            <span className="text-[13px] text-gray-600 font-medium">
               Preview
             </span>
-            <div style={{ display: "flex", gap: 6 }}>
-              <div
-                style={{
-                  width: 12,
-                  height: 12,
-                  borderRadius: "50%",
-                  background: "#ff5f57",
-                }}
-              />
-              <div
-                style={{
-                  width: 12,
-                  height: 12,
-                  borderRadius: "50%",
-                  background: "#febc2e",
-                }}
-              />
-              <div
-                style={{
-                  width: 12,
-                  height: 12,
-                  borderRadius: "50%",
-                  background: "#28c840",
-                }}
-              />
+            <div className="flex gap-1.5">
+              <div className="w-3 h-3 rounded-full bg-red-500" />
+              <div className="w-3 h-3 rounded-full bg-yellow-400" />
+              <div className="w-3 h-3 rounded-full bg-green-600" />
             </div>
           </div>
-          <div
-            style={{
-              flex: 1,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              minHeight: 280,
-              padding: 20,
-              color: "#9ca3af",
-              fontSize: 14,
-            }}
-          >
+          <div className="flex-1 flex items-center justify-center min-h-[280px] p-5 text-gray-400 text-sm">
             {output ? (
-              <div
-                style={{
-                  width: "100%",
-                  color: "#374151",
-                  fontSize: 13,
-                  fontFamily: "JetBrains Mono, monospace",
-                }}
-              >
-                <p
-                  style={{ color: "#22c55e", fontWeight: 700, marginBottom: 8 }}
-                >
-                  ✓ Code executed
-                </p>
-                <p style={{ color: "#6b7280", fontSize: 12 }}>
+              <div className="w-full text-gray-700 text-[13px] font-mono">
+                <p className="text-green font-bold mb-2">✓ Code executed</p>
+                <p className="text-gray-500 text-xs">
                   A live preview would render here in a sandboxed iframe
                   environment.
                 </p>
@@ -381,39 +230,13 @@ export default function Playground() {
 
       {/* Quick templates */}
       <div>
-        <p
-          style={{
-            fontSize: 13,
-            color: "var(--text-secondary)",
-            marginBottom: 12,
-          }}
-        >
-          Quick Templates
-        </p>
-        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+        <p className="text-[13px] text-ink-dim mb-3">Quick Templates</p>
+        <div className="flex gap-2.5 flex-wrap">
           {Object.keys(templates).map((key) => (
             <button
               key={key}
               onClick={() => handleTemplate(key)}
-              style={{
-                background: "var(--bg-card)",
-                border: "1px solid var(--border)",
-                borderRadius: 8,
-                padding: "8px 16px",
-                fontSize: 13,
-                color: "var(--text-secondary)",
-                cursor: "pointer",
-                fontWeight: 500,
-                transition: "all 0.15s",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--border-light)";
-                e.currentTarget.style.color = "var(--text-primary)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border)";
-                e.currentTarget.style.color = "var(--text-secondary)";
-              }}
+              className="bg-card border border-line rounded-lg px-4 py-2 text-[13px] text-ink-dim font-medium hover:border-line-soft hover:text-ink transition-all"
             >
               {key.replace(/([A-Z])/g, " $1").trim()}
             </button>
